@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+// The customer service definition.
+service CustomerService {
+    // GetCustomers Procedure
+    rpc GetCustomers (Empty) returns (CustomerList) {}
+
+    // NewCustomer Procedure
+    rpc NewCustomer (NewCustomer) returns (Customer) {}
+
+    // UpdateUser Procedure
+    rpc UpdateUser (UpdateUserRequest) returns (ResponseMessage) {}
+
+    // GetUserById Procedure
+    rpc GetUserById (UserId) returns (Customer) {}
+
+    // DeleteUser Procedure
+    rpc DeleteUser (UserId) returns (ResponseMessage) {}
+}
+
+message Empty {}
+
+// Message for adding a new customer
+message NewCustomer {
+    string name = 1;
+    string email = 2;
+}
+
+// Message representing a customer
+message Customer {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+// Message representing a list of customers
+message CustomerList {
+    repeated Customer customers = 1;
+}
+
+// Message for updating an existing customer
+message UpdateUserRequest {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+// Message for identifying a customer by ID
+message UserId {
+    int32 id = 1;
+}
+
+// Message for response with success or error
+message ResponseMessage {
+    string message = 1;
+}
